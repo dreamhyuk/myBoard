@@ -22,4 +22,7 @@ public class Role {
 
     private String name; //역할 이름(ADMIN, USER, etc.)
 
+    public Role(String role_user) {
+        this.name = role_user;
+    }
 }
