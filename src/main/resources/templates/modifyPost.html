@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="text-right">
-            <a type="submit" class="btn btn-primary" th:href="@{/board/view(postId=${post.id})}">취소</a>
+            <a type="submit" class="btn btn-primary" th:href="@{/board/view/{postId}(postId=${post.id})}">취소</a>
             <button type="submit" class="btn btn-primary">작성</button>
         </div>
     </form>
