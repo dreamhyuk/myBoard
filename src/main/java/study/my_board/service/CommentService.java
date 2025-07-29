@@ -81,4 +81,8 @@ public class CommentService {
         commentRepository.delete(comment);
     }
 
+    public Comment findOne(Long commentId) {
+        return commentRepository.findById(commentId)
+                .orElseThrow(() -> new IllegalArgumentException("this id comment not found"));
+    }
 }

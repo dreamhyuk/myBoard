@@ -26,6 +26,7 @@ public class Member {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
+    @Column(unique = true)
     private String username;
     private String password;
     private Boolean enabled;

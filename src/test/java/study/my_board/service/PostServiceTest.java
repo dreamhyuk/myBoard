@@ -22,7 +22,7 @@ import static org.junit.Assert.*;
 @Transactional
 public class PostServiceTest {
 
-    @PersistenceContext EntityManager em;
+//    @PersistenceContext EntityManager em;
     @Autowired PostService postService;
     @Autowired PostRepository postRepository;
 

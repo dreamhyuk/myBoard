@@ -33,11 +33,12 @@ public class CommentApiController {
                                                      @RequestBody @Valid CommentDto.Request request,
                                                      @AuthenticationPrincipal CustomUserDetails currentUser) {
 
-        Long savedComment = commentService.save(currentUser.getId(), postId, request);
-        CommentDto.Response response = new CommentDto.Response(request.toEntity());
+        Long savedCommentId = commentService.save(currentUser.getId(), postId, request);
+        Comment savedComment = commentService.findOne(savedCommentId);
+        CommentDto.Response response = new CommentDto.Response(savedComment);
 
         // WebSocket 구독자에게 전송
-        messagingTemplate.convertAndSend("/topic/comments", savedComment);
+        messagingTemplate.convertAndSend("/topic/comments", savedCommentId);
 
         return ResponseEntity.ok(response);
     }
