@@ -6,7 +6,7 @@ spring:
     # EC2의 mariadb
     url: jdbc:mariadb://localhost:3306/myboard
     username: myadmin
-    password: 1234
+    password: 123456
     driver-class-name: org.mariadb.jdbc.Driver
 
     # 로컬의 mariadb
