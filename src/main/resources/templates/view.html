@@ -1,0 +1,71 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/common :: head('뷰')">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link href="/starter-template.css" rel="stylesheet">
+    <title>게시글 상세 페이지</title>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:replace="fragments/common :: menu('view')"></nav>
+
+    <div class="container">
+        <header>
+            <div class="text-container">
+                <h1 class="fw-bolder mb-1 left-text" th:text="${post.title}"></h1>
+                <div class="right-text" th:text="${post.createdDate}">2020-00-00</div>
+            </div>
+            <div class="text-container">
+                <div class="text-muted fst-italic mb-2" style="font-weight: bold" th:text="${post.author}" ></div>
+                <div class="right-text">조회: <span th:text="${post.views}"></span></div>
+            </div>
+        </header>
+
+        <hr class="section-divider">
+        <div class="mb-3" style="margin-top: 20px; min-height: 120px;">
+            <p th:text="${post.content}"></p>
+        </div>
+        <div class="text-right">
+            <a class="btn btn-primary" th:if="${canEdit}" th:href="@{/board/modify/{postId}(postId = ${post.id})}">수정</a>
+            <button type="button" class="btn btn-primary" th:if="${canDelete}"
+               th:onclick="|deletePost(${post.id})|">글 삭제</button>
+        </div>
+
+
+        <hr class="comment-divider" style="margin-top: 40px;">
+        <div id="comment-list">
+            <!-- 댓글 목록 -->
+        </div>
+        <!-- 페이지네이션 영역 -->
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center" id="pagination">
+                <!-- 페이지 버튼이 여기에 동적으로 추가 -->
+            </ul>
+        </nav>
+        <!-- 댓글 작성 폼 -->
+        <form id="comment-form" style="margin-top: 10px;">
+            <div class="form-group">
+                <label for="comment-content" class="comment-label">댓글 추가:</label>
+                <textarea id="comment-content" rows="3" placeholder="댓글을 남겨보세요" style="width: 100%"></textarea>
+            </div>
+            <div class="text-right">
+                <button type="button" class="btn btn-primary" id="create-comment-btn"
+                        th:data-id="${post.id}">댓글 작성</button>
+            </div>
+        </form>
+    </div>
+
+    <footer th:replace="fragments/common :: footer"></footer>
+    <script src="/js/comments.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.6.1/dist/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+
+
+</body>
+</html>
